@@ -38,10 +38,6 @@ function Download-Repo {
         [string]$repoName
     )
 
-
-
-
-
     if (-not (Test-Path -Path $repoName)) {
         Write-Output "Downloading $repoName..."
         $repo = Invoke-RestMethod -Uri "$api/$repoName" -Method GET
