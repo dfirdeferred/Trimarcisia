@@ -55,7 +55,6 @@ download_repo() {
     echo "$repo_name already downloaded."
     xdg-open "$repo_name" 
   fi
-  cd "$repo_name"/* 2>/dev/null || cd "$repo_name" || exit
 }
 
 # Display list of repositories
