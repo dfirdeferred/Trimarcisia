@@ -56,7 +56,7 @@ for ($i = 0; $i -lt $repos.Count; $i++) {
 }
 
 # Read user input
-$selection = Read-Host "Enter the number of the repository you want to download/open"
+$selection = [int](Read-Host "Enter the number of the repository you want to download/open")
 
 # Validate user input
 if ($selection -eq 0) {
