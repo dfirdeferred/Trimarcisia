@@ -30,10 +30,10 @@ echo "|____/  |_| |_|\___/|_|  |___/\___|_| |_| |_|\___|_| |_|"
 #)
 REPOS=$(curl -s https://api.github.com/users/Trimarc/repos | jq -r '.[].name')
 
-# Check if wget and unzip are installed, if not, install them
-if ! command -v wget &> /dev/null; then
-  echo "wget not found. Installing..."
-  sudo apt-get install wget -y
+# Check if curl and unzip are installed, if not, install them
+if ! command -v curl &> /dev/null; then
+  echo "curl not found. Installing..."
+  sudo apt-get install curl -y
 fi
 
 if ! command -v unzip &> /dev/null; then
@@ -43,18 +43,35 @@ fi
 
 # Function to download and unzip the repository
 download_repo() {
-  local repo_name="$1"
-  if [ ! -d "$repo_name" ]; then
-    echo "Downloading $repo_name..."
-    wget "https://github.com/Trimarc/$repo_name/archive/refs/heads/main.zip" -O "$repo_name.zip"
-    echo "Unzipping $repo_name..."
-    unzip "$repo_name.zip" -d "$repo_name"
-    rm "$repo_name.zip"
-    xdg-open "$repo_name" 
-  else
-    echo "$repo_name already downloaded."
-    xdg-open "$repo_name" 
-  fi
+    repo_name=$1
+
+    # Check if the directory exists
+    if [ ! -d "$repo_name" ]; then
+        echo "Downloading $repo_name..."
+        
+        # Get repository information
+        repo=$(curl -s "$api/$repo_name")
+        current_branch=$(echo "$repo" | jq -r '.default_branch')
+        
+        # Construct the zip file URL
+        zip_url=$(echo "$repo" | jq -r '.archive_url' | sed "s/{archive_format}{\/ref}/zipball\/$current_branch/")
+        
+        # Download and unzip the repository
+        curl -L -o "$repo_name.zip" "$zip_url"
+        echo "Unzipping $repo_name..."
+        unzip "$repo_name.zip" -d "$repo_name"
+        
+        # Clean up the zip file
+        rm "$repo_name.zip"
+        
+        # Open the folder
+        xdg-open "$repo_name" >/dev/null 2>&1 &
+    else
+        echo "$repo_name already downloaded."
+        
+        # Open the folder if it exists
+        xdg-open "$repo_name" >/dev/null 2>&1 &
+    fi
 }
 
 # Display list of repositories
