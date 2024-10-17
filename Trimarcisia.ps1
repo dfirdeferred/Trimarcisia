@@ -1,8 +1,25 @@
-##################################################################
-# Trimarcisia.sh v1.0.0                                          #
-#                                                                #
-#              Written by Darryl G. Baker                        #
-##################################################################
+<#
+.SYNOPSIS
+This tool makes it easy to download and open Trimarc Security tools available to help
+the enterprise secure Active Directory.
+
+.DESCRIPTION
+Trimarcisia, which translates to "feat of three horsemen", was a military cavalry tactic
+used by the ancient Celts. If one horse or soldier fell, another was there to take their
+place and continue the fight.
+
+.INPUTS
+None
+
+.OUTPUTS
+New folder(s) containing repositories from the Trimarc GitHub.
+
+.LINK
+https://github.com/dfirdeferred/Trimarcisia
+
+.NOTES
+Author: Darryl G. Baker
+#>
 
 # Print ASCII Art
 Write-Output " _____   _   _                                          "
@@ -12,20 +29,7 @@ Write-Output " ___) | |  _  | (_) | |  \__ \  __/ | | | | |  __/ | | |"
 Write-Output "|____/  |_| |_|\___/|_|  |___/\___|_| |_| |_|\___|_| |_|"
 
 # List of repositories
-$repos = @(
-    "ADAuditingGroup",
-    "PowerPUG",
-    "Locksmith",
-    "BlueTuxedo",
-    "Find-and-Fix",
-    "papers",
-    "New-KrbtgtKeys.ps1",
-    "SPN-Descriptions",
-    "Create-Vulnerable-ADDS",
-    "Invoke-TrimarcADChecks",
-    "TailscaleLogAnalyticIngestor",
-    "play.backdoorsandbreaches.com"
-)
+$repos = (Invoke-RestMethod -Method GET -Uri https://api.github.com/users/Trimarc/repos).Name
 
 # Function to download and unzip the repository
 function Download-Repo {
