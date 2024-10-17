@@ -29,6 +29,7 @@ Write-Output " ___) | |  _  | (_) | |  \__ \  __/ | | | | |  __/ | | |"
 Write-Output "|____/  |_| |_|\___/|_|  |___/\___|_| |_| |_|\___|_| |_|"
 
 # List of repositories
+$api = "https://api.github.com/repos/trimarc"
 $repos = (Invoke-RestMethod -Method GET -Uri https://api.github.com/users/Trimarc/repos).Name
 
 # Function to download and unzip the repository
@@ -37,9 +38,16 @@ function Download-Repo {
         [string]$repoName
     )
 
+
+
+
+
     if (-not (Test-Path -Path $repoName)) {
         Write-Output "Downloading $repoName..."
-        Invoke-WebRequest -Uri "https://github.com/Trimarc/$repoName/archive/refs/heads/main.zip" -OutFile "$repoName.zip"
+        $repo = Invoke-RestMethod -Uri "$api/$repoName" -Method GET
+        $currentBranch = $repo.default_branch
+        $zipUrl = $repo.archive_url -replace "{archive_format}{/ref}", "zipball/$currentBranch"
+        Invoke-RestMethod -Uri $zipUrl -OutFile "$repoName.zip"
         Write-Output "Unzipping $repoName..."
         Expand-Archive -Path "$repoName.zip" -DestinationPath $repoName
         Remove-Item "$repoName.zip"
