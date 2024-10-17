@@ -49,7 +49,6 @@ function Download-Repo {
         Write-Output "$repoName already downloaded."
         Start-Process -FilePath $repoName
     }
-    Set-Location -Path "$repoName\*" -ErrorAction SilentlyContinue
 }
 
 # Display list of repositories
