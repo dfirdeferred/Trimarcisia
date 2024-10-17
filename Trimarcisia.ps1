@@ -29,20 +29,7 @@ Write-Output " ___) | |  _  | (_) | |  \__ \  __/ | | | | |  __/ | | |"
 Write-Output "|____/  |_| |_|\___/|_|  |___/\___|_| |_| |_|\___|_| |_|"
 
 # List of repositories
-$repos = @(
-    "ADAuditingGroup",
-    "PowerPUG",
-    "Locksmith",
-    "BlueTuxedo",
-    "Find-and-Fix",
-    "papers",
-    "New-KrbtgtKeys.ps1",
-    "SPN-Descriptions",
-    "Create-Vulnerable-ADDS",
-    "Invoke-TrimarcADChecks",
-    "TailscaleLogAnalyticIngestor",
-    "play.backdoorsandbreaches.com"
-)
+$repos = (Invoke-RestMethod -Method GET -Uri https://api.github.com/users/Trimarc/repos).Name
 
 # Function to download and unzip the repository
 function Download-Repo {
