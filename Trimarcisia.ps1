@@ -1,5 +1,8 @@
-# Trimarcisia.ps1 v1.0.0
-# Written by Darryl G. Baker
+##################################################################
+# Trimarcisia.sh v1.0.0                                          #
+#                                                                #
+#              Written by Darryl G. Baker                        #
+##################################################################
 
 # Print ASCII Art
 Write-Output " _____   _   _                                          "
