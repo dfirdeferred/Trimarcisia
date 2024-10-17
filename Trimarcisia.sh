@@ -14,20 +14,21 @@ echo " ___) | |  _  | (_) | |  \__ \  __/ | | | | |  __/ | | |"
 echo "|____/  |_| |_|\___/|_|  |___/\___|_| |_| |_|\___|_| |_|"
 
 # List of repositories
-REPOS=(
-  "ADAuditingGroup"
-  "PowerPUG"
-  "Locksmith"
-  "BlueTuxedo"
-  "Find-and-Fix"
-  "papers"
-  "New-KrbtgtKeys.ps1"
-  "SPN-Descriptions"
-  "Create-Vulnerable-ADDS"
-  "Invoke-TrimarcADChecks"
-  "TailscaleLogAnalyticIngestor"
-  "play.backdoorsandbreaches.com"
-)
+#REPOS=(
+#  "ADAuditingGroup"
+#  "PowerPUG"
+#  "Locksmith"
+#  "BlueTuxedo"
+#  "Find-and-Fix"
+#  "papers"
+#  "New-KrbtgtKeys.ps1"
+#  "SPN-Descriptions"
+#  "Create-Vulnerable-ADDS"
+#  "Invoke-TrimarcADChecks"
+#  "TailscaleLogAnalyticIngestor"
+#  "play.backdoorsandbreaches.com"
+#)
+REPOS=$(curl -s https://api.github.com/users/Trimarc/repos | jq -r '.[].name')
 
 # Check if wget and unzip are installed, if not, install them
 if ! command -v wget &> /dev/null; then
