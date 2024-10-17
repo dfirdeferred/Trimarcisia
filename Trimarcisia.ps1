@@ -1,8 +1,25 @@
-##################################################################
-# Trimarcisia.sh v1.0.0                                          #
-#                                                                #
-#              Written by Darryl G. Baker                        #
-##################################################################
+<#
+.SYNOPSIS
+This tool makes it easy to download and open Trimarc Security tools available to help
+the enterprise secure Active Directory.
+
+.DESCRIPTION
+Trimarcisia, which translates to "feat of three horsemen", was a military cavalry tactic
+used by the ancient Celts. If one horse or soldier fell, another was there to take their
+place and continue the fight.
+
+.INPUTS
+None
+
+.OUTPUTS
+New folder(s) containing repositories from the Trimarc GitHub.
+
+.LINK
+https://github.com/dfirdeferred/Trimarcisia
+
+.NOTES
+Author: Darryl G. Baker
+#>
 
 # Print ASCII Art
 Write-Output " _____   _   _                                          "
